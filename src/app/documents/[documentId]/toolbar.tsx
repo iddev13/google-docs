@@ -120,7 +120,6 @@ const FontSizeButton = () => {
 			e.preventDefault();
 			updateFontSize(inputValue);
 			editor?.commands.focus();
-			console.log(inputValue);
 		}
 	};
 
