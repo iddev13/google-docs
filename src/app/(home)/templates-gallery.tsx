@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useMutation } from 'convex/react';
+import { toast } from 'sonner';
 
 import {
 	Carousel,
@@ -23,7 +24,9 @@ export const TemplatesGallery = () => {
 	const onTemplateClick = (title: string, initialContent: string) => {
 		setIsCreating(true);
 		create({ title, initialContent })
+			.catch(() => toast.error('Something went wrong...'))
 			.then((documentId) => {
+				toast.success('Document created');
 				router.push(`/documents/${documentId}`);
 			})
 			.finally(() => setIsCreating(false));
@@ -49,6 +52,7 @@ export const TemplatesGallery = () => {
 									<button
 										type="button"
 										disabled={isCreating}
+										// TODO Add initialContent
 										onClick={() => onTemplateClick(template.label, '')}
 										style={{
 											backgroundImage: `url(${template.imageUrl})`,

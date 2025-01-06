@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 
+import { Toaster } from '@/components/ui/toaster';
 import { ConvexClientProvider } from '@/providers/convex-client-provider';
 import './globals.css';
 
@@ -23,7 +24,10 @@ export default function RootLayout({
 		<html lang="en">
 			<body className={inter.className}>
 				<NuqsAdapter>
-					<ConvexClientProvider>{children}</ConvexClientProvider>
+					<ConvexClientProvider>
+						{children}
+						<Toaster />
+					</ConvexClientProvider>
 				</NuqsAdapter>
 			</body>
 		</html>

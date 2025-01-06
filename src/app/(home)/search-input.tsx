@@ -6,8 +6,13 @@ import { SearchIcon, XIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useSearchParam } from '@/hooks/use-search-param';
+import { cn } from '@/lib/utils';
 
-export const SearchInput = () => {
+type SearchInputType = {
+	className?: string;
+};
+
+export const SearchInput = ({ className }: SearchInputType) => {
 	const [search, setSearch] = useSearchParam('search');
 	const [value, setValue] = useState<string>(search);
 
@@ -30,7 +35,7 @@ export const SearchInput = () => {
 	};
 
 	return (
-		<div className="flex-1 flex items-center justify-center">
+		<div className={cn('flex-1 flex items-center justify-center', className)}>
 			<form className="relative max-w-[720px] w-full" onSubmit={handleSubmit}>
 				<Input
 					ref={inputRef}
