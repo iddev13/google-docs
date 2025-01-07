@@ -2,12 +2,23 @@
 
 import { useRef, useState } from 'react';
 import { FaCaretDown } from 'react-icons/fa';
+import { useStorage, useMutation } from '@liveblocks/react';
+import { LEFT_MARGIN_DEFAULT, RIGHT_MARGIN_DEFAULT } from '@/constants/margins';
 
 const markers = Array.from({ length: 83 }, (_, i) => i);
 
 export const Ruler = () => {
-	const [leftMargin, setLeftMargin] = useState<number>(56);
-	const [rightMargin, setRightMargin] = useState<number>(56);
+	const leftMargin =
+		useStorage((root) => root.leftMargin) ?? LEFT_MARGIN_DEFAULT;
+	const setLeftMargin = useMutation(({ storage }, position: number) => {
+		storage.set('leftMargin', position);
+	}, []);
+	const rightMargin =
+		useStorage((root) => root.rightMargin) ?? RIGHT_MARGIN_DEFAULT;
+	const setRightMargin = useMutation(({ storage }, position: number) => {
+		storage.set('rightMargin', position);
+	}, []);
+
 	const [isDraggingLeft, setIsDraggingLeft] = useState<boolean>(false);
 	const [isDraggingRight, setIsDraggingRight] = useState<boolean>(false);
 	const rulerRef = useRef<HTMLDivElement>(null);
@@ -29,7 +40,7 @@ export const Ruler = () => {
 				if (isDraggingLeft) {
 					const maxLeftPosition = 816 - rightMargin - 100;
 					const newLeftPosition = Math.min(rawPosition, maxLeftPosition);
-					setLeftMargin(newLeftPosition); // TODO: Make collaborative
+					setLeftMargin(newLeftPosition);
 				} else if (isDraggingRight) {
 					const maxRightPosition = 816 - (leftMargin + 100);
 					const newRightPosition = Math.max(816 - rawPosition, 0);
@@ -49,10 +60,10 @@ export const Ruler = () => {
 	};
 
 	const handleLeftDoubleClick = () => {
-		setLeftMargin(56);
+		setLeftMargin(LEFT_MARGIN_DEFAULT);
 	};
 	const handleRightDoubleClick = () => {
-		setRightMargin(56);
+		setRightMargin(RIGHT_MARGIN_DEFAULT);
 	};
 
 	return (
