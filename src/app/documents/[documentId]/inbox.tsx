@@ -32,7 +32,6 @@ export const Inbox = () => {
 
 const InboxMenu = () => {
 	const { inboxNotifications } = useInboxNotifications();
-	console.log({ inboxNotifications });
 
 	return (
 		<>

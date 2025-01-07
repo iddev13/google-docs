@@ -2,12 +2,12 @@ import { useRef, useState } from 'react';
 import { useMutation } from 'convex/react';
 import { BsCloudCheck, BsCloudSlash } from 'react-icons/bs';
 import { useStatus } from '@liveblocks/react';
+import { LoaderIcon } from 'lucide-react';
 import { toast } from 'sonner';
 
 import { Id } from '../../../../convex/_generated/dataModel';
 import { api } from '../../../../convex/_generated/api';
 import { useDebounce } from '@/hooks/use-debounce';
-import { LoaderIcon } from 'lucide-react';
 
 type DocumentInputType = {
 	title: string;

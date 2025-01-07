@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { UserButton, OrganizationSwitcher } from '@clerk/nextjs';
 
 import { SearchInput } from './search-input';
+import Burger from '@/components/header/burger';
 
 export const Navbar = () => {
 	return (
@@ -11,9 +12,9 @@ export const Navbar = () => {
 				<Link href="/">
 					<Image src="/logo.svg" alt="Logo" width={36} height={36} />
 				</Link>
-				<h3 className="text-xl">Docs</h3>
+				<h3 className="hidden md:block text-xl">Docs</h3>
 			</div>
-			<SearchInput className="mr-2 lg:mg-0" />
+			<SearchInput className="hidden md:block mr-2 lg:mg-0" />
 			<div className="flex gap-3 items-center">
 				<OrganizationSwitcher
 					afterCreateOrganizationUrl="/"
@@ -22,6 +23,7 @@ export const Navbar = () => {
 					afterSelectPersonalUrl="/"
 				/>
 				<UserButton />
+				<Burger className="md:hidden" />
 			</div>
 		</nav>
 	);

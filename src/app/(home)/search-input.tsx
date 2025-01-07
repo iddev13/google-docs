@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useSearchParam } from '@/hooks/use-search-param';
 import { cn } from '@/lib/utils';
+import { useOpenMobileNav } from '@/hooks/use-open-mobile-nav';
 
 type SearchInputType = {
 	className?: string;
@@ -15,6 +16,7 @@ type SearchInputType = {
 export const SearchInput = ({ className }: SearchInputType) => {
 	const [search, setSearch] = useSearchParam('search');
 	const [value, setValue] = useState<string>(search);
+	const { isOpen, onClose } = useOpenMobileNav();
 
 	const inputRef = useRef<HTMLInputElement>(null);
 
@@ -34,6 +36,12 @@ export const SearchInput = ({ className }: SearchInputType) => {
 		inputRef.current?.blur();
 	};
 
+	const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+		if (e.key === 'Enter') {
+			onClose();
+		}
+	};
+
 	return (
 		<div className={cn('flex-1 flex items-center justify-center', className)}>
 			<form className="relative max-w-[720px] w-full" onSubmit={handleSubmit}>
@@ -43,6 +51,7 @@ export const SearchInput = ({ className }: SearchInputType) => {
 					value={value}
 					placeholder="Search"
 					className="md:text-base px-14 placeholder:text-neutral-800 w-full border-none rounded-full h-[48px] focus-visible:shadow=[0_1px_1px_0_rgba(65,69,73,.3),0_1px_3px_1px_rgba(65,69,73,.15)] bg-[#f0f4f8] focus-visible:ring-0 focus:bg-white"
+					onKeyDown={handleKeyDown}
 				/>
 				<Button
 					type="submit"
