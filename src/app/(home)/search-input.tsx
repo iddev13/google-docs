@@ -16,7 +16,7 @@ type SearchInputType = {
 export const SearchInput = ({ className }: SearchInputType) => {
 	const [search, setSearch] = useSearchParam('search');
 	const [value, setValue] = useState<string>(search);
-	const { isOpen, onClose } = useOpenMobileNav();
+	const { onClose } = useOpenMobileNav();
 
 	const inputRef = useRef<HTMLInputElement>(null);
 

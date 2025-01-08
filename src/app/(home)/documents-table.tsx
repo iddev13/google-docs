@@ -25,7 +25,7 @@ export const DocumentsTable = ({
 	loadMore,
 }: DocumentsTableType) => {
 	return (
-		<div className="max-w-screen-xl mx-auto px-16 py-6 flex flex-col gap-5">
+		<div className="max-w-screen-xl mx-auto px-4 lg:px-16 py-6 flex flex-col gap-5">
 			{documents === undefined ? (
 				<div className="flex item-center justify-center h-24">
 					<LoaderIcon className="size-5 text-muted-foreground animate-spin" />
